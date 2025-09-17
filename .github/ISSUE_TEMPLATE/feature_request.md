@@ -1,9 +1,9 @@
 ---
 name: ✨ Feature Request
 about: Suggérer une nouvelle fonctionnalité pour env-checker-thiaka
-title: '[FEATURE] '
-labels: ['enhancement', 'needs-triage']
-assignees: ''
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: ""
 ---
 
 ## ✨ Description de la fonctionnalité
@@ -26,7 +26,7 @@ Une description claire et concise de toutes les solutions alternatives que vous 
 
 ```typescript
 // Comment vous aimeriez utiliser cette fonctionnalité
-import { EnvChecker } from 'env-checker-thiaka';
+import { EnvChecker } from "env-checker-thiaka";
 
 const checker = new EnvChecker({
   // Nouvelle configuration proposée

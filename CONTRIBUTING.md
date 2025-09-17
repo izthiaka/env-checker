@@ -59,6 +59,7 @@ npm run build
 ### Workflow Git
 
 1. **Créer une branche** pour votre fonctionnalité :
+
    ```bash
    git checkout -b feature/nom-de-votre-fonctionnalite
    ```
@@ -66,6 +67,7 @@ npm run build
 2. **Faire vos modifications** en suivant les standards de code
 
 3. **Tester vos changements** :
+
    ```bash
    npm test
    npm run lint
@@ -73,12 +75,14 @@ npm run build
    ```
 
 4. **Commiter vos changements** :
+
    ```bash
    git add .
    git commit -m "feat: ajouter nouvelle fonctionnalité"
    ```
 
 5. **Pousser vers votre fork** :
+
    ```bash
    git push origin feature/nom-de-votre-fonctionnalite
    ```
@@ -118,17 +122,17 @@ npm run build
 ### Structure des tests
 
 ```typescript
-describe('NomDeLaClasse', () => {
-  describe('nomDeLaMéthode', () => {
-    it('devrait faire quelque chose de spécifique', () => {
+describe("NomDeLaClasse", () => {
+  describe("nomDeLaMéthode", () => {
+    it("devrait faire quelque chose de spécifique", () => {
       // Arrange
-      const input = 'test';
-      
+      const input = "test";
+
       // Act
       const result = functionToTest(input);
-      
+
       // Assert
-      expect(result).toBe('expected');
+      expect(result).toBe("expected");
     });
   });
 });
@@ -157,7 +161,7 @@ npm run test:coverage
 
 ### JSDoc
 
-```typescript
+````typescript
 /**
  * Valide les variables d'environnement
  * @param options - Options de configuration
@@ -169,8 +173,8 @@ npm run test:coverage
  * });
  * ```
  */
-export function checkEnv(options: EnvCheckerOptions): EnvCheckResult
-```
+export function checkEnv(options: EnvCheckerOptions): EnvCheckResult;
+````
 
 ### Changelog
 

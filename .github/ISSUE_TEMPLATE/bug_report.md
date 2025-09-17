@@ -1,9 +1,9 @@
 ---
 name: 🐛 Bug Report
 about: Signaler un bug dans env-checker-thiaka
-title: '[BUG] '
-labels: ['bug', 'needs-triage']
-assignees: ''
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: ""
 ---
 
 ## 🐛 Description du bug
@@ -40,10 +40,10 @@ Si applicable, ajoutez des captures d'écran pour aider à expliquer votre probl
 
 ```typescript
 // Ajoutez votre code ici
-import { EnvChecker } from 'env-checker-thiaka';
+import { EnvChecker } from "env-checker-thiaka";
 
 const checker = new EnvChecker({
-  requiredVars: ['DATABASE_URL'],
+  requiredVars: ["DATABASE_URL"],
 });
 ```
 

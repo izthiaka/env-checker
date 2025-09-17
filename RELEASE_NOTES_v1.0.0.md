@@ -7,6 +7,7 @@ Cette première version apporte une solution complète pour la validation des va
 ## ✨ Nouvelles fonctionnalités
 
 ### 🔧 Classe principale EnvChecker
+
 - Validation complète des variables d'environnement requises et optionnelles
 - Support des types (string, number, boolean)
 - Mode strict pour arrêter l'exécution en cas d'erreur
@@ -14,6 +15,7 @@ Cette première version apporte une solution complète pour la validation des va
 - Résumé détaillé des variables
 
 ### 🛠️ Fonctions utilitaires
+
 - `checkEnv()` - Vérification rapide
 - `checkEnvStrict()` - Vérification avec arrêt en cas d'erreur
 - `getEnvVar()` - Obtenir une variable avec validation
@@ -23,6 +25,7 @@ Cette première version apporte une solution complète pour la validation des va
 - `loadAllEnvFiles()` - Chargement automatique de tous les fichiers .env
 
 ### 🔍 Détection automatique des fichiers .env
+
 - `.env`
 - `.env.local`
 - `.env.development`
@@ -53,22 +56,24 @@ Cette première version apporte une solution complète pour la validation des va
 ## 🎯 Cas d'usage
 
 ### Projet NestJS
+
 ```typescript
-import { checkEnvStrict } from 'env-checker-thiaka';
+import { checkEnvStrict } from "env-checker-thiaka";
 
 checkEnvStrict({
-  requiredVars: ['DATABASE_URL', 'JWT_SECRET', 'PORT'],
-  optionalVars: ['DEBUG', 'LOG_LEVEL'],
+  requiredVars: ["DATABASE_URL", "JWT_SECRET", "PORT"],
+  optionalVars: ["DEBUG", "LOG_LEVEL"],
 });
 ```
 
 ### Projet Next.js
+
 ```javascript
-const { checkEnv } = require('env-checker-thiaka');
+const { checkEnv } = require("env-checker-thiaka");
 
 checkEnv({
-  requiredVars: ['NEXT_PUBLIC_API_URL', 'DATABASE_URL'],
-  optionalVars: ['NEXT_PUBLIC_DEBUG'],
+  requiredVars: ["NEXT_PUBLIC_API_URL", "DATABASE_URL"],
+  optionalVars: ["NEXT_PUBLIC_DEBUG"],
 });
 ```
 
