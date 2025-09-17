@@ -1,5 +1,13 @@
 # env-checker-thiaka
 
+[![npm version](https://badge.fury.io/js/env-checker-thiaka.svg)](https://badge.fury.io/js/env-checker-thiaka)
+[![npm downloads](https://img.shields.io/npm/dm/env-checker-thiaka.svg)](https://www.npmjs.com/package/env-checker-thiaka)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16.0.0-green.svg)](https://nodejs.org/)
+[![GitHub stars](https://img.shields.io/github/stars/izthiaka/env-checker.svg)](https://github.com/izthiaka/env-checker/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/izthiaka/env-checker.svg)](https://github.com/izthiaka/env-checker/issues)
+
 Un package npm pour valider les variables d'environnement dans les projets Node.js, NestJS et Next.js. Évitez les erreurs de variables d'environnement manquantes avec une validation simple et efficace.
 
 ## 🚀 Installation

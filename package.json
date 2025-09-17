@@ -28,14 +28,23 @@
     "nodejs",
     "nestjs",
     "nextjs",
-    "dotenv"
+    "dotenv",
+    "typescript",
+    "configuration",
+    "config",
+    "settings",
+    "environment-variables",
+    "env-checker",
+    "thiaka"
   ],
   "author": "Ismaila T. BADJI",
   "license": "MIT",
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
   ],
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -60,5 +69,12 @@
   "bugs": {
     "url": "https://github.com/izthiaka/env-checker/issues"
   },
-  "homepage": "https://github.com/izthiaka/env-checker#readme"
+  "homepage": "https://github.com/izthiaka/env-checker#readme",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/izthiaka"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
