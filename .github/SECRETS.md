@@ -5,6 +5,7 @@ Ce fichier explique comment configurer les secrets nécessaires pour GitHub Acti
 ## 📋 Secrets requis
 
 ### 1. NPM_TOKEN (Requis pour la publication)
+
 - **Description** : Token d'authentification npm pour publier le package
 - **Comment l'obtenir** :
   1. Connectez-vous à [npmjs.com](https://npmjs.com)
@@ -13,6 +14,7 @@ Ce fichier explique comment configurer les secrets nécessaires pour GitHub Acti
   4. Copiez le token
 
 ### 2. SNYK_TOKEN (Optionnel - pour le scan de sécurité)
+
 - **Description** : Token Snyk pour l'analyse de sécurité
 - **Comment l'obtenir** :
   1. Créez un compte sur [snyk.io](https://snyk.io)
@@ -20,6 +22,7 @@ Ce fichier explique comment configurer les secrets nécessaires pour GitHub Acti
   3. Copiez le token
 
 ### 3. CODECOV_TOKEN (Optionnel - pour la couverture de code)
+
 - **Description** : Token Codecov pour l'upload de couverture
 - **Comment l'obtenir** :
   1. Connectez-vous à [codecov.io](https://codecov.io)

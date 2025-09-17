@@ -2,12 +2,14 @@ import { config } from "dotenv";
 import { existsSync } from "fs";
 import { join } from "path";
 import { EnvCheckerOptions, EnvCheckResult } from "./types";
+import { AdvancedValidator } from "./advanced-validator";
 
 /**
  * Classe principale pour vérifier les variables d'environnement
  */
 export class EnvChecker {
   private options: Required<EnvCheckerOptions>;
+  private validator?: AdvancedValidator;
 
   constructor(options: EnvCheckerOptions) {
     this.options = {
@@ -16,8 +18,14 @@ export class EnvChecker {
       loadEnvFile: true,
       strict: false,
       errorPrefix: "[ENV-CHECKER]",
+      validation: undefined,
       ...options,
-    };
+    } as Required<EnvCheckerOptions>;
+
+    // Initialiser le validateur avancé si configuré
+    if (this.options.validation) {
+      this.validator = new AdvancedValidator(this.options.validation);
+    }
 
     this.loadEnvFileIfNeeded();
   }
@@ -61,6 +69,8 @@ export class EnvChecker {
       optionalPresentVars: [],
       optionalMissingVars: [],
       errors: [],
+      validationErrors: [],
+      transformedVars: {},
     };
 
     // Vérifier les variables requises
@@ -75,6 +85,18 @@ export class EnvChecker {
         );
       } else {
         result.presentVars.push(varName);
+        
+        // Validation avancée si configurée
+        if (this.validator) {
+          const validationResult = this.validator.validate(varName, value);
+          if (!validationResult.isValid) {
+            result.validationErrors.push(...validationResult.errors);
+            result.isValid = false;
+          }
+          result.transformedVars[varName] = validationResult.transformedValue;
+        } else {
+          result.transformedVars[varName] = value;
+        }
       }
     }
 
@@ -86,12 +108,25 @@ export class EnvChecker {
         result.optionalMissingVars.push(varName);
       } else {
         result.optionalPresentVars.push(varName);
+        
+        // Validation avancée si configurée
+        if (this.validator) {
+          const validationResult = this.validator.validate(varName, value);
+          if (!validationResult.isValid) {
+            result.validationErrors.push(...validationResult.errors);
+            result.isValid = false;
+          }
+          result.transformedVars[varName] = validationResult.transformedValue;
+        } else {
+          result.transformedVars[varName] = value;
+        }
       }
     }
 
     // Gérer le mode strict
     if (this.options.strict && !result.isValid) {
-      const errorMessage = result.errors.join("\n");
+      const allErrors = [...result.errors, ...result.validationErrors];
+      const errorMessage = allErrors.join("\n");
       console.error(errorMessage);
       process.exit(1);
     }
@@ -183,6 +218,32 @@ export class EnvChecker {
   }
 
   /**
+   * Obtient une variable transformée
+   */
+  public getTransformedVar(varName: string): any {
+    const result = this.check();
+    return result.transformedVars[varName];
+  }
+
+  /**
+   * Obtient toutes les variables transformées
+   */
+  public getAllTransformedVars(): Record<string, any> {
+    const result = this.check();
+    return result.transformedVars;
+  }
+
+  /**
+   * Valide une variable spécifique avec les règles configurées
+   */
+  public validateVar(varName: string, value: string): { isValid: boolean; errors: string[]; transformedValue?: any } {
+    if (!this.validator) {
+      return { isValid: true, errors: [], transformedValue: value };
+    }
+    return this.validator.validate(varName, value);
+  }
+
+  /**
    * Affiche un résumé des variables d'environnement
    */
   public printSummary(): void {
@@ -208,6 +269,11 @@ export class EnvChecker {
           ", "
         )}`
       );
+    }
+
+    if (result.validationErrors.length > 0) {
+      console.log(`  Erreurs de validation: ${result.validationErrors.length}`);
+      result.validationErrors.forEach(error => console.log(`    - ${error}`));
     }
   }
 }

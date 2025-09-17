@@ -11,6 +11,21 @@ export interface EnvCheckerOptions {
   strict?: boolean;
   /** Préfixe pour les messages d'erreur */
   errorPrefix?: string;
+  /** Configuration de validation avancée */
+  validation?: ValidationConfig;
+}
+
+export interface ValidationConfig {
+  /** Validation regex pour les variables */
+  regex?: Record<string, RegExp>;
+  /** Validation personnalisée pour les variables */
+  custom?: Record<string, (value: string) => boolean>;
+  /** Transformation des valeurs */
+  transform?: Record<string, (value: string) => any>;
+  /** Validation de plage pour les nombres */
+  numberRange?: Record<string, { min?: number; max?: number }>;
+  /** Validation de format prédéfini */
+  format?: Record<string, 'email' | 'url' | 'uuid' | 'date' | 'json'>;
 }
 
 export interface EnvCheckResult {
@@ -26,6 +41,10 @@ export interface EnvCheckResult {
   optionalMissingVars: string[];
   /** Messages d'erreur */
   errors: string[];
+  /** Erreurs de validation */
+  validationErrors: string[];
+  /** Variables transformées */
+  transformedVars: Record<string, any>;
 }
 
 export interface EnvCheckerConfig {

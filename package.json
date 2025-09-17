@@ -2,8 +2,9 @@
   "name": "env-checker-thiaka",
   "version": "1.0.0",
   "description": "Un package pour valider les variables d'environnement dans les projets Node.js/NestJS/Next.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "bin": {
+    "env-checker": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -48,6 +49,7 @@
   ],
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "@types/commander": "^2.12.2",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
@@ -57,7 +59,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "dotenv": "^16.3.0"
+    "dotenv": "^16.3.0",
+    "commander": "^11.0.0"
   },
   "engines": {
     "node": ">=16.0.0"
