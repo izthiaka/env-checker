@@ -1,6 +1,6 @@
 {
   "name": "env-checker-thiaka",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Un package pour valider les variables d'environnement dans les projets Node.js/NestJS/Next.js",
   "bin": {
     "env-checker": "./dist/cli.js"

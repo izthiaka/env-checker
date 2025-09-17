@@ -1,5 +1,10 @@
 import { EnvChecker } from "../env-checker";
-import { AdvancedValidator, validators, transformers, createValidationConfig } from "../advanced-validator";
+import {
+  AdvancedValidator,
+  validators,
+  transformers,
+  createValidationConfig,
+} from "../advanced-validator";
 import { checkEnv, getEnvVar, getEnvNumber, getEnvBoolean } from "../index";
 
 describe("AdvancedValidator", () => {
@@ -35,18 +40,25 @@ describe("AdvancedValidator", () => {
     it("devrait rejeter une variable avec format email invalide", () => {
       const result = validator.validate("EMAIL", "invalid-email");
       expect(result.isValid).toBe(false);
-      expect(result.errors).toContain("Variable EMAIL n'est pas un email valide");
+      expect(result.errors).toContain(
+        "Variable EMAIL n'est pas un email valide"
+      );
     });
 
     it("devrait valider une variable avec regex", () => {
-      const result = validator.validate("API_KEY", "abcdefghijklmnopqrstuvwxyz123456");
+      const result = validator.validate(
+        "API_KEY",
+        "abcdefghijklmnopqrstuvwxyz123456"
+      );
       expect(result.isValid).toBe(true);
     });
 
     it("devrait rejeter une variable avec regex invalide", () => {
       const result = validator.validate("API_KEY", "short");
       expect(result.isValid).toBe(false);
-      expect(result.errors[0]).toContain("Variable API_KEY ne correspond pas au pattern regex");
+      expect(result.errors[0]).toContain(
+        "Variable API_KEY ne correspond pas au pattern regex"
+      );
     });
 
     it("devrait valider une variable avec plage numérique", () => {
@@ -108,7 +120,9 @@ describe("Validators prédéfinis", () => {
 
   describe("uuid", () => {
     it("devrait valider un UUID valide", () => {
-      expect(validators.uuid("550e8400-e29b-41d4-a716-446655440000")).toBe(true);
+      expect(validators.uuid("550e8400-e29b-41d4-a716-446655440000")).toBe(
+        true
+      );
     });
 
     it("devrait rejeter un UUID invalide", () => {

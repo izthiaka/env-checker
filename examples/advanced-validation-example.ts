@@ -64,7 +64,9 @@ const checker = new EnvChecker({
         // Vérifier que c'est un JSON valide avec des booléens
         try {
           const flags = JSON.parse(value);
-          return Object.values(flags).every((flag) => typeof flag === "boolean");
+          return Object.values(flags).every(
+            (flag) => typeof flag === "boolean"
+          );
         } catch {
           return false;
         }
@@ -91,17 +93,17 @@ const result = checker.check();
 
 if (!result.isValid) {
   console.error("❌ Configuration invalide:");
-  
+
   if (result.errors.length > 0) {
     console.error("Variables manquantes:");
     result.errors.forEach((error) => console.error(`  - ${error}`));
   }
-  
+
   if (result.validationErrors.length > 0) {
     console.error("Erreurs de validation:");
     result.validationErrors.forEach((error) => console.error(`  - ${error}`));
   }
-  
+
   process.exit(1);
 }
 
@@ -156,12 +158,12 @@ app.use((req, res, next) => {
   // Vérification rapide avec les fonctions utilitaires
   const apiKey = checker.getVar("API_KEY");
   const debug = checker.getBoolean("DEBUG", false);
-  
+
   if (debug) {
     console.log("🔍 Mode debug activé");
     console.log("Request:", req.method, req.path);
   }
-  
+
   next();
 });
 
@@ -169,7 +171,7 @@ app.use((req, res, next) => {
 app.get("/api/feature/:flag", (req, res) => {
   const { flag } = req.params;
   const featureFlags = checker.getTransformedVar("FEATURE_FLAGS") || {};
-  
+
   if (featureFlags[flag]) {
     res.json({ enabled: true, flag });
   } else {

@@ -19,7 +19,8 @@ export const validators = {
   },
 
   uuid: (value: string): boolean => {
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     return uuidRegex.test(value);
   },
 
@@ -43,12 +44,14 @@ export const validators = {
   },
 
   ip: (value: string): boolean => {
-    const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    const ipRegex =
+      /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     return ipRegex.test(value);
   },
 
   semver: (value: string): boolean => {
-    const semverRegex = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+    const semverRegex =
+      /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
     return semverRegex.test(value);
   },
 
@@ -60,7 +63,7 @@ export const validators = {
   base64: (value: string): boolean => {
     const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
     return base64Regex.test(value) && value.length % 4 === 0;
-  }
+  },
 };
 
 /**
@@ -73,10 +76,10 @@ export const transformers = {
   toNumber: (value: string): number => Number(value),
   toBoolean: (value: string): boolean => {
     const lowerValue = value.toLowerCase();
-    return ['true', '1', 'yes', 'on'].includes(lowerValue);
+    return ["true", "1", "yes", "on"].includes(lowerValue);
   },
-  toArray: (value: string, separator: string = ','): string[] => {
-    return value.split(separator).map(item => item.trim());
+  toArray: (value: string, separator: string = ","): string[] => {
+    return value.split(separator).map((item) => item.trim());
   },
   toObject: (value: string): any => {
     try {
@@ -84,7 +87,7 @@ export const transformers = {
     } catch {
       return value;
     }
-  }
+  },
 };
 
 /**
@@ -100,14 +103,19 @@ export class AdvancedValidator {
   /**
    * Valide une variable avec toutes les règles configurées
    */
-  validate(varName: string, value: string): { isValid: boolean; errors: string[]; transformedValue?: any } {
+  validate(
+    varName: string,
+    value: string
+  ): { isValid: boolean; errors: string[]; transformedValue?: any } {
     const errors: string[] = [];
     let transformedValue: any = value;
 
     // Validation regex
     if (this.config.regex?.[varName]) {
       if (!this.config.regex[varName].test(value)) {
-        errors.push(`Variable ${varName} ne correspond pas au pattern regex: ${this.config.regex[varName]}`);
+        errors.push(
+          `Variable ${varName} ne correspond pas au pattern regex: ${this.config.regex[varName]}`
+        );
       }
     }
 
@@ -122,7 +130,9 @@ export class AdvancedValidator {
     // Validation personnalisée
     if (this.config.custom?.[varName]) {
       if (!this.config.custom[varName](value)) {
-        errors.push(`Variable ${varName} ne passe pas la validation personnalisée`);
+        errors.push(
+          `Variable ${varName} ne passe pas la validation personnalisée`
+        );
       }
     }
 
@@ -154,7 +164,7 @@ export class AdvancedValidator {
     return {
       isValid: errors.length === 0,
       errors,
-      transformedValue
+      transformedValue,
     };
   }
 
@@ -178,7 +188,7 @@ export class AdvancedValidator {
     return {
       isValid: allErrors.length === 0,
       errors: allErrors,
-      transformedVars
+      transformedVars,
     };
   }
 }
@@ -186,12 +196,14 @@ export class AdvancedValidator {
 /**
  * Fonction utilitaire pour créer une configuration de validation rapide
  */
-export function createValidationConfig(config: Partial<ValidationConfig>): ValidationConfig {
+export function createValidationConfig(
+  config: Partial<ValidationConfig>
+): ValidationConfig {
   return {
     regex: config.regex || {},
     custom: config.custom || {},
     transform: config.transform || {},
     numberRange: config.numberRange || {},
-    format: config.format || {}
+    format: config.format || {},
   };
 }

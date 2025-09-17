@@ -25,7 +25,7 @@ export interface ValidationConfig {
   /** Validation de plage pour les nombres */
   numberRange?: Record<string, { min?: number; max?: number }>;
   /** Validation de format prédéfini */
-  format?: Record<string, 'email' | 'url' | 'uuid' | 'date' | 'json'>;
+  format?: Record<string, "email" | "url" | "uuid" | "date" | "json">;
 }
 
 export interface EnvCheckResult {

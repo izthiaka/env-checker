@@ -39,10 +39,69 @@ if (!result.isValid) {
 }
 ```
 
+### 🚀 Validation avancée (Nouveau en v1.1.0)
+
+```typescript
+import { EnvChecker, validators, transformers, createValidationConfig } from "env-checker-thiaka";
+
+const checker = new EnvChecker({
+  requiredVars: ["EMAIL", "API_KEY", "PORT", "DATABASE_URL"],
+  optionalVars: ["DEBUG", "LOG_LEVEL", "CORS_ORIGINS"],
+  validation: createValidationConfig({
+    // Validation de format prédéfini
+    format: {
+      EMAIL: "email",
+      DATABASE_URL: "url",
+    },
+    
+    // Validation regex personnalisée
+    regex: {
+      API_KEY: /^[A-Za-z0-9]{32}$/, // Clé API de 32 caractères
+    },
+    
+    // Validation de plage pour les nombres
+    numberRange: {
+      PORT: { min: 1, max: 65535 },
+    },
+    
+    // Validation personnalisée
+    custom: {
+      LOG_LEVEL: (value: string) => {
+        const validLevels = ["error", "warn", "info", "debug", "trace"];
+        return validLevels.includes(value.toLowerCase());
+      },
+    },
+    
+    // Transformation des valeurs
+    transform: {
+      DEBUG: transformers.toBoolean,
+      LOG_LEVEL: transformers.toLowerCase,
+      CORS_ORIGINS: (value: string) => transformers.toArray(value, ","),
+    },
+  }),
+});
+
+const result = checker.check();
+if (!result.isValid) {
+  console.error("Erreurs:", result.validationErrors);
+  process.exit(1);
+}
+
+// Utiliser les variables transformées
+const config = {
+  email: result.transformedVars.EMAIL,
+  apiKey: result.transformedVars.API_KEY,
+  port: result.transformedVars.PORT,
+  debug: result.transformedVars.DEBUG, // boolean
+  logLevel: result.transformedVars.LOG_LEVEL, // lowercase string
+  corsOrigins: result.transformedVars.CORS_ORIGINS, // string[]
+};
+```
+
 ### Utilisation avec la classe EnvChecker
 
 ```typescript
-import { EnvChecker } from "@izthiaka/env-checker";
+import { EnvChecker } from "env-checker-thiaka";
 
 const envChecker = new EnvChecker({
   requiredVars: ["DATABASE_URL", "PORT"],
@@ -63,6 +122,25 @@ const dbUrl = envChecker.getVar("DATABASE_URL");
 envChecker.printSummary();
 ```
 
+### 🛠️ CLI (Nouveau en v1.1.0)
+
+```bash
+# Installation globale pour utiliser la CLI
+npm install -g env-checker-thiaka
+
+# Valider une variable spécifique
+env-checker validate EMAIL test@example.com --format email
+
+# Vérifier toutes les variables d'environnement
+env-checker check --required DATABASE_URL,PORT --strict
+
+# Détecter les fichiers .env disponibles
+env-checker detect
+
+# Générer un exemple de configuration
+env-checker example --type nestjs
+```
+
 ### Fonctions utilitaires
 
 ```typescript
@@ -71,7 +149,7 @@ import {
   getEnvNumber,
   getEnvBoolean,
   loadAllEnvFiles,
-} from "@izthiaka/env-checker";
+} from "env-checker-thiaka";
 
 // Charger automatiquement tous les fichiers .env
 loadAllEnvFiles();
@@ -203,6 +281,7 @@ const config = {
 
 ## 🎯 Fonctionnalités
 
+### Fonctionnalités de base
 - ✅ **Validation des variables requises et optionnelles**
 - ✅ **Détection automatique des fichiers .env**
 - ✅ **Support des types (string, number, boolean)**
@@ -211,6 +290,14 @@ const config = {
 - ✅ **Support TypeScript complet**
 - ✅ **Fonctions utilitaires pour un usage rapide**
 - ✅ **Tests unitaires complets**
+
+### Nouvelles fonctionnalités v1.1.0
+- 🚀 **Validation avancée avec regex, format et validation personnalisée**
+- 🔄 **Transformation automatique des valeurs (toBoolean, toNumber, toArray, etc.)**
+- 🛠️ **CLI complète pour validation en ligne de commande**
+- 📊 **Validation de plage pour les nombres (min/max)**
+- 🎯 **Validateurs prédéfinis (email, url, uuid, port, ip, semver, hex, base64)**
+- 🔧 **API étendue avec variables transformées**
 
 ## 🔍 Détection automatique des fichiers .env
 

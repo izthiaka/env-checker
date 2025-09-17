@@ -85,7 +85,7 @@ export class EnvChecker {
         );
       } else {
         result.presentVars.push(varName);
-        
+
         // Validation avancée si configurée
         if (this.validator) {
           const validationResult = this.validator.validate(varName, value);
@@ -108,7 +108,7 @@ export class EnvChecker {
         result.optionalMissingVars.push(varName);
       } else {
         result.optionalPresentVars.push(varName);
-        
+
         // Validation avancée si configurée
         if (this.validator) {
           const validationResult = this.validator.validate(varName, value);
@@ -236,7 +236,10 @@ export class EnvChecker {
   /**
    * Valide une variable spécifique avec les règles configurées
    */
-  public validateVar(varName: string, value: string): { isValid: boolean; errors: string[]; transformedValue?: any } {
+  public validateVar(
+    varName: string,
+    value: string
+  ): { isValid: boolean; errors: string[]; transformedValue?: any } {
     if (!this.validator) {
       return { isValid: true, errors: [], transformedValue: value };
     }
@@ -273,7 +276,7 @@ export class EnvChecker {
 
     if (result.validationErrors.length > 0) {
       console.log(`  Erreurs de validation: ${result.validationErrors.length}`);
-      result.validationErrors.forEach(error => console.log(`    - ${error}`));
+      result.validationErrors.forEach((error) => console.log(`    - ${error}`));
     }
   }
 }
