@@ -1,0 +1,64 @@
+{
+  "name": "env-checker-thiaka",
+  "version": "1.0.0",
+  "description": "Un package pour valider les variables d'environnement dans les projets Node.js/NestJS/Next.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "demo": "node demo.js",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build && npm test && npm run lint",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "variables",
+    "validation",
+    "checker",
+    "nodejs",
+    "nestjs",
+    "nextjs",
+    "dotenv"
+  ],
+  "author": "Ismaila T. BADJI",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/izthiaka/env-checker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/izthiaka/env-checker/issues"
+  },
+  "homepage": "https://github.com/izthiaka/env-checker#readme"
+}

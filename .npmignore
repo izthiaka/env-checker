@@ -1,0 +1,25 @@
+# Fichiers et dossiers à ignorer lors de la publication
+node_modules/
+dist/
+coverage/
+*.log
+*.tgz
+*.tar.gz
+.DS_Store
+.env*
+!.env.example
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers de test
+src/__tests__/
+src/**/*.test.ts
+src/**/*.spec.ts
+
+# Fichiers de développement
+examples/
+docs/
+scripts/
