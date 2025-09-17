@@ -5,7 +5,6 @@ import {
   transformers,
   createValidationConfig,
 } from "../advanced-validator";
-import { checkEnv, getEnvVar, getEnvNumber, getEnvBoolean } from "../index";
 
 describe("AdvancedValidator", () => {
   let validator: AdvancedValidator;
